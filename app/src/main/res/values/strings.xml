@@ -1,3 +1,33 @@
-<resources>
-    <string name="app_name">androidNotesProjectSchur</string>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <string name="splash_textview_app_name">Notes\nProject</string>
+    <string name="splash_button_main">Discover features</string>
+    <string name="splash_textview_to_login">You have an account? <b>Log-in</b></string>
+
+    <string name="signup_button_main">Sign-up</string>
+    <string name="signup_textview_to_login">You have an account? <b>Log-in</b></string>
+    <string name="signup_textview_title">Sign-up</string>
+    <string name="signup_edittext_hint_first_name">First Name</string>
+    <string name="signup_edittext_hint_last_name">Last Name</string>
+    <string name="signup_edittext_hint_email">Email</string>
+    <string name="signup_edittext_hint_password">Password</string>
+
+    <string name="login_button_main">Log-in</string>
+    <string name="login_textview_to_signup">Return to <b>Sign-up</b></string>
+    <string name="login_textview_title">Log-in</string>
+    <string name="login_edittext_hint_email">Email</string>
+    <string name="login_edittext_hint_password">Password</string>
+
+    <string name="error_text_default">Unknown error</string>
+    <string name="error_text_1">First Name must be from 3 to 255 symbols</string>
+    <string name="error_text_2">Password must be from 6 to 50 symbols</string>
+    <string name="error_text_3">The password must contain at least 1 uppercase, 1 lowercase, 1 number, and at least 1 special character.</string>
+    <string name="error_text_4">Email must be in email format</string>
+    <string name="signup_successful_text">Registration successful</string>
+
+    <string name="login_successful_text">Login successful</string>
+
+    <string name="default_edittext_error">Required field</string>
+    <string name="allowed_text_char">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="allowed_any_char">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-.!@#$%^:{}|*()?1234567890</string>
 </resources>

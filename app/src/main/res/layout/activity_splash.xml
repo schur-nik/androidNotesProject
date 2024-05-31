@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_blue">
+
+
+    <TextView
+        style="@style/splash_textview_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/splash_textview_app_name_margin_90dp"
+        android:text="@string/splash_textview_app_name" />
+
+    <Button
+        android:id="@+id/splashButtonMain"
+        android:text="@string/splash_button_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="@dimen/main_active_button_margin_140dp"
+        style="@style/default_main_active_button" />
+
+    <TextView
+        android:id="@+id/splashTextViewToLogIn"
+        android:text="@string/splash_textview_to_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="@dimen/splash_textview_login_margin_100dp"
+        android:clickable="true"
+        style="@style/default_text" />
+
+
+</FrameLayout>

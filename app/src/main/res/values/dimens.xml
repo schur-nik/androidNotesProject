@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_active_button_margin_140dp">140dp</dimen>
+    <dimen name="main_active_button_text_20sp">20sp</dimen>
+    <dimen name="signature_textview_jump_margin_100dp">100dp</dimen>
+
+    <dimen name="splash_textview_app_name_margin_90dp">90dp</dimen>
+    <dimen name="splash_textview_login_margin_100dp">100dp</dimen>
+    <dimen name="splash_textview_app_name_textsize_55sp">55sp</dimen>
+
+    <dimen name="default_common_text_14sp">14sp</dimen>
+    <dimen name="default_title_text_40sp">40sp</dimen>
+
+    <dimen name="linear_edittext_margin_25dp">25dp</dimen>
+    <dimen name="linear_edittext_width_260dp">260dp</dimen>
+    <dimen name="linear_layout_width_340dp">340dp</dimen>
+    <dimen name="linear_layout_margin_100dp">100dp</dimen>
+    <dimen name="linear_layout_padding_30dp">30dp</dimen>
+</resources>
