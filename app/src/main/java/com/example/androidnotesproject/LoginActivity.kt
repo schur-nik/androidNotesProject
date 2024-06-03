@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
 class LoginActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -26,12 +27,13 @@ class LoginActivity : AppCompatActivity() {
                 loginEditTextPassword.error = getString(R.string.default_edittext_error)
 
             Auth.logIn(this, User(loginEditTextEmail.text.toString(),
-                                         loginEditTextPassword.text.toString()
-            ))
+                                         loginEditTextPassword.text.toString()))
         }
 
         loginTextViewToSignUp.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
+
     }
+
 }

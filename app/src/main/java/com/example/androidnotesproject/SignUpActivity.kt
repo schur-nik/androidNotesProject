@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 
 
 class SignUpActivity: AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
@@ -24,14 +25,16 @@ class SignUpActivity: AppCompatActivity() {
 
         signupButtonMain.setOnClickListener {
             Auth.signUp(this, User(signupEditTextEmail.text.toString(),
-                                            signupEditTextFirstName.text.toString(),
-                                            signupEditTextLastName.text.toString(),
-                                            signupEditTextPassword.text.toString()
-                                           ))
+                                          signupEditTextFirstName.text.toString(),
+                                          signupEditTextLastName.text.toString(),
+                                          signupEditTextPassword.text.toString()
+                                          ))
         }
 
         signupTextViewToLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
+
     }
+
 }

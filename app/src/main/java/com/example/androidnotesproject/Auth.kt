@@ -6,6 +6,12 @@ import java.lang.Exception
 
 object Auth {
 
+    private const val VALIDATE_NAME_LENGTH_MIN = 3;
+    private const val VALIDATE_NAME_LENGTH_MAX = 255;
+    private const val VALIDATE_PASS_LENGTH_MIN = 6;
+    private const val VALIDATE_PASS_LENGTH_MAX = 50;
+    private const val VALIDATE_PASS_REGULAR = "(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*";
+
     fun signUp(context: Context, user: User) {
         val errorCode = signUpValidate(user)
         if (errorCode == 0) {
@@ -20,7 +26,6 @@ object Auth {
                                context.resources.getString(context.resources.getIdentifier("error_text_default", "string", context.packageName)),
                                Toast.LENGTH_LONG).show()
             }
-
         }
     }
 
@@ -29,11 +34,11 @@ object Auth {
     }
 
     private fun signUpValidate(user: User):Int {
-        if (user.firstname.length < 3 || user.firstname.length > 255) {
+        if (user.firstname.length < VALIDATE_NAME_LENGTH_MIN || user.firstname.length > VALIDATE_NAME_LENGTH_MAX) {
             return 1
-        } else if (user.password.length < 6 || user.password.length > 50) {
+        } else if (user.password.length < VALIDATE_PASS_LENGTH_MIN || user.password.length > VALIDATE_PASS_LENGTH_MAX) {
             return 2
-        } else if (!user.password.matches(Regex("(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\\\$%^&*(),.?\\\":{}|<>]).*"))) {
+        } else if (!user.password.matches(Regex(VALIDATE_PASS_REGULAR))) {
             return 3
         } else if (user.email.isBlank() || !android.util.Patterns.EMAIL_ADDRESS.matcher(user.email).matches()) {
             return 4
