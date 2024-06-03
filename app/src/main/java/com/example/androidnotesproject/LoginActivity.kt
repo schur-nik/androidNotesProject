@@ -26,8 +26,13 @@ class LoginActivity : AppCompatActivity() {
             if (loginEditTextPassword.text.isBlank())
                 loginEditTextPassword.error = getString(R.string.default_edittext_error)
 
-            Auth.logIn(this, User(loginEditTextEmail.text.toString(),
-                                         loginEditTextPassword.text.toString()))
+            Auth.logIn(
+                context = this,
+                user = User(
+                    email = loginEditTextEmail.text.toString(),
+                    password = loginEditTextPassword.text.toString()
+                )
+            )
         }
 
         loginTextViewToSignUp.setOnClickListener {

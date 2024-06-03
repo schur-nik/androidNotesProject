@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
 
-class SignUpActivity: AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,17 +18,21 @@ class SignUpActivity: AppCompatActivity() {
         val signupButtonMain: Button = findViewById(R.id.signupButtonMain)
         val signupTextViewToLogin: TextView = findViewById(R.id.signupTextViewToLogin)
 
-        val signupEditTextFirstName:EditText = findViewById(R.id.signupEditTextFirstName)
-        val signupEditTextLastName:EditText = findViewById(R.id.signupEditTextLastName)
-        val signupEditTextEmail:EditText = findViewById(R.id.signupEditTextEmail)
-        val signupEditTextPassword:EditText = findViewById(R.id.signupEditTextPassword)
+        val signupEditTextFirstName: EditText = findViewById(R.id.signupEditTextFirstName)
+        val signupEditTextLastName: EditText = findViewById(R.id.signupEditTextLastName)
+        val signupEditTextEmail: EditText = findViewById(R.id.signupEditTextEmail)
+        val signupEditTextPassword: EditText = findViewById(R.id.signupEditTextPassword)
 
         signupButtonMain.setOnClickListener {
-            Auth.signUp(this, User(signupEditTextEmail.text.toString(),
-                                          signupEditTextFirstName.text.toString(),
-                                          signupEditTextLastName.text.toString(),
-                                          signupEditTextPassword.text.toString()
-                                          ))
+            Auth.signUp(
+                context = this,
+                user = User(
+                    email = signupEditTextEmail.text.toString(),
+                    firstname = signupEditTextFirstName.text.toString(),
+                    lastname = signupEditTextLastName.text.toString(),
+                    password = signupEditTextPassword.text.toString()
+                )
+            )
         }
 
         signupTextViewToLogin.setOnClickListener {

@@ -43,7 +43,7 @@
             style="@style/default_edittext"
 
             android:layout_gravity="center|top"
-            android:layout_marginTop="@dimen/linear_edittext_margin_25dp"/>
+            android:layout_marginTop="@dimen/linear_edittext_margin_25dp" />
 
     </LinearLayout>
 
