@@ -21,18 +21,29 @@ class LoginActivity : AppCompatActivity() {
         val loginEditTextPassword: EditText = findViewById(R.id.loginEditTextPassword)
 
         loginButtonMain.setOnClickListener {
-            if (loginEditTextEmail.text.isBlank())
-                loginEditTextEmail.error = getString(R.string.default_edittext_error)
-            if (loginEditTextPassword.text.isBlank())
-                loginEditTextPassword.error = getString(R.string.default_edittext_error)
+            Auth.logInValidate(loginEditTextEmail.text.toString(), "EMAIL_ADDRESS").apply {
+                when (this) {
+                    is Auth.ValidateResult.Invalid -> loginEditTextEmail.error = Auth.getErrorString(this@LoginActivity, this.errorCode)
+                    else -> loginEditTextEmail.error = null
+                }
+            }
 
-            Auth.logIn(
-                context = this,
-                user = User(
-                    email = loginEditTextEmail.text.toString(),
-                    password = loginEditTextPassword.text.toString()
+            Auth.logInValidate(loginEditTextPassword.text.toString()).apply {
+                when (this) {
+                    is Auth.ValidateResult.Invalid -> loginEditTextPassword.error = Auth.getErrorString(this@LoginActivity, this.errorCode)
+                    else -> loginEditTextPassword.error = null
+                }
+            }
+
+            if (loginEditTextEmail.error.isNullOrBlank() && loginEditTextPassword.error.isNullOrBlank()) {
+                Auth.logIn(
+                    context = this,
+                    user = User(
+                        email = loginEditTextEmail.text.toString(),
+                        password = loginEditTextPassword.text.toString()
+                    )
                 )
-            )
+            }
         }
 
         loginTextViewToSignUp.setOnClickListener {

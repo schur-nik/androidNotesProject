@@ -18,16 +18,16 @@
     <string name="login_edittext_hint_email">Email</string>
     <string name="login_edittext_hint_password">Password</string>
 
-    <string name="error_text_default">Unknown error</string>
-    <string name="error_text_1">First Name must be from 3 to 255 symbols</string>
-    <string name="error_text_2">Password must be from 6 to 50 symbols</string>
-    <string name="error_text_3">The password must contain at least 1 uppercase, 1 lowercase, 1 number, and at least 1 special character.</string>
-    <string name="error_text_4">Email must be in email format</string>
-    <string name="signup_successful_text">Registration successful</string>
+    <string name="error_default_required">Required field</string>
+    <string name="error_default">Unknown error</string>
+    <string name="error_name_length">First Name must be from 3 to 255 symbols</string>
+    <string name="error_pass_length">Password must be from 6 to 50 symbols</string>
+    <string name="error_pass_regex">The password must contain at least 1 uppercase, 1 lowercase, 1 number, and at least 1 special character.</string>
+    <string name="error_email_regex">Email must be in email format</string>
 
+    <string name="signup_successful_text">Registration successful</string>
     <string name="login_successful_text">Login successful</string>
 
-    <string name="default_edittext_error">Required field</string>
     <string name="allowed_text_char">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="allowed_any_char">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-.!@#$%^:{}|*()?1234567890</string>
 </resources>
