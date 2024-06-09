@@ -1,4 +1,4 @@
-package com.example.androidnotesproject
+package com.example.androidnotesproject.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-
+import com.example.androidnotesproject.R
+import com.example.androidnotesproject.data.User
+import com.example.androidnotesproject.utils.*
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -23,29 +25,29 @@ class SignUpActivity : AppCompatActivity() {
         val signupEditTextPassword: EditText = findViewById(R.id.signupEditTextPassword)
 
         signupButtonMain.setOnClickListener {
-            Auth.signUpValidate(signupEditTextFirstName.text.toString(), "FIRST_NAME").apply {
+            signUpValidate(signupEditTextFirstName.text.toString(), "FIRST_NAME").apply {
                 when (this) {
-                    is Auth.ValidateResult.Invalid -> signupEditTextFirstName.error = Auth.getErrorString(this@SignUpActivity, this.errorCode)
+                    is ValidateResult.Invalid -> signupEditTextFirstName.error = getErrorString(errorCode)
                     else -> signupEditTextFirstName.error = null
                 }
             }
 
-            Auth.signUpValidate(signupEditTextEmail.text.toString(), "EMAIL_ADDRESS").apply {
+            signUpValidate(signupEditTextEmail.text.toString(), "EMAIL_ADDRESS").apply {
                 when (this) {
-                    is Auth.ValidateResult.Invalid -> signupEditTextEmail.error = Auth.getErrorString(this@SignUpActivity, this.errorCode)
+                    is ValidateResult.Invalid -> signupEditTextEmail.error = getErrorString(errorCode)
                     else -> signupEditTextEmail.error = null
                 }
             }
 
-            Auth.signUpValidate(signupEditTextPassword.text.toString(), "PASSWORD").apply {
+            signUpValidate(signupEditTextPassword.text.toString(), "PASSWORD").apply {
                 when (this) {
-                    is Auth.ValidateResult.Invalid -> signupEditTextPassword.error = Auth.getErrorString(this@SignUpActivity, this.errorCode)
+                    is ValidateResult.Invalid -> signupEditTextPassword.error = getErrorString(errorCode)
                     else -> signupEditTextPassword.error = null
                 }
             }
 
             if (signupEditTextFirstName.error.isNullOrBlank() && signupEditTextEmail.error.isNullOrBlank() && signupEditTextPassword.error.isNullOrBlank()) {
-                Auth.signUp(
+                signUp(
                     context = this,
                     user = User(
                         email = signupEditTextEmail.text.toString(),
@@ -54,13 +56,15 @@ class SignUpActivity : AppCompatActivity() {
                         password = signupEditTextPassword.text.toString()
                     )
                 )
+
+                startActivity(Intent(this, LoginActivity::class.java))
+
             }
         }
 
         signupTextViewToLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
-
     }
 
 }

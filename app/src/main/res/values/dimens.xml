@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="main_active_button_margin_140dp">140dp</dimen>
     <dimen name="main_active_button_text_20sp">20sp</dimen>
-    <dimen name="signature_textview_jump_margin_100dp">100dp</dimen>
 
     <dimen name="splash_textview_app_name_margin_90dp">90dp</dimen>
     <dimen name="splash_textview_login_margin_100dp">100dp</dimen>
@@ -14,6 +14,17 @@
     <dimen name="linear_edittext_margin_25dp">25dp</dimen>
     <dimen name="linear_edittext_width_260dp">260dp</dimen>
     <dimen name="linear_layout_width_340dp">340dp</dimen>
-    <dimen name="linear_layout_margin_100dp">100dp</dimen>
     <dimen name="linear_layout_padding_30dp">30dp</dimen>
+
+    <dimen name="toolbar_textview_clickable_padding_10dp">10dp</dimen>
+
+    <dimen name="item_note_padding_10dp">10dp</dimen>
+    <dimen name="item_note_title_text_20sp">20sp</dimen>
+    <dimen name="item_note_message_margin_text_10dp">10dp</dimen>
+
+    <dimen name="add_note_edittext_margin_25dp">25dp</dimen>
+    <dimen name="add_note_title_text_25sp">25dp</dimen>
+    <dimen name="add_note_title_padding_10dp">10dp</dimen>
+    <dimen name="add_note_edittext_margin_20dp">20dp</dimen>
+
 </resources>

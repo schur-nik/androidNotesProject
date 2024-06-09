@@ -1,4 +1,4 @@
-package com.example.androidnotesproject
+package com.example.androidnotesproject.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import com.example.androidnotesproject.R
+import com.example.androidnotesproject.data.User
+import com.example.androidnotesproject.utils.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -20,36 +22,39 @@ class LoginActivity : AppCompatActivity() {
         val loginEditTextEmail: EditText = findViewById(R.id.loginEditTextEmail)
         val loginEditTextPassword: EditText = findViewById(R.id.loginEditTextPassword)
 
+
         loginButtonMain.setOnClickListener {
-            Auth.logInValidate(loginEditTextEmail.text.toString(), "EMAIL_ADDRESS").apply {
+            logInValidate(loginEditTextEmail.text.toString(), "EMAIL_ADDRESS").apply {
                 when (this) {
-                    is Auth.ValidateResult.Invalid -> loginEditTextEmail.error = Auth.getErrorString(this@LoginActivity, this.errorCode)
+                    is ValidateResult.Invalid -> loginEditTextEmail.error = getErrorString(errorCode)
                     else -> loginEditTextEmail.error = null
                 }
             }
 
-            Auth.logInValidate(loginEditTextPassword.text.toString()).apply {
+            logInValidate(loginEditTextPassword.text.toString()).apply {
                 when (this) {
-                    is Auth.ValidateResult.Invalid -> loginEditTextPassword.error = Auth.getErrorString(this@LoginActivity, this.errorCode)
+                    is ValidateResult.Invalid -> loginEditTextPassword.error = getErrorString(errorCode)
                     else -> loginEditTextPassword.error = null
                 }
             }
 
             if (loginEditTextEmail.error.isNullOrBlank() && loginEditTextPassword.error.isNullOrBlank()) {
-                Auth.logIn(
+                logIn(
                     context = this,
                     user = User(
                         email = loginEditTextEmail.text.toString(),
                         password = loginEditTextPassword.text.toString()
                     )
                 )
+
+                startActivity(Intent(this, NotesActivity::class.java))
+
             }
         }
 
         loginTextViewToSignUp.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
-
     }
 
 }
