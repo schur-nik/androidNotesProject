@@ -2,6 +2,7 @@ package com.example.androidnotesproject.utils.noteAdapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import com.example.androidnotesproject.R
 import com.example.androidnotesproject.data.Note
@@ -16,8 +17,5 @@ class NoteAdapter(private val onTitleClick : (note : Note) -> Unit) : ListAdapte
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         holder.bind(getItem(position), onTitleClick)
-//        holder.itemView.setOnClickListener {
-//            onNoteClick.onClick(getItem(position))
-//        }
     }
 }

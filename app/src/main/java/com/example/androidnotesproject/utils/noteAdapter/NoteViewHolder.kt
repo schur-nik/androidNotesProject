@@ -20,6 +20,14 @@ class NoteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         titleItemTextView.setOnClickListener{
             onTitleClick(note)
         }
+
+        messageItemTextView.setOnClickListener{
+            if (messageItemTextView.maxLines == 2) {
+                messageItemTextView.maxLines = Int.MAX_VALUE
+            } else {
+                messageItemTextView.maxLines = 2
+            }
+        }
     }
 
 }
