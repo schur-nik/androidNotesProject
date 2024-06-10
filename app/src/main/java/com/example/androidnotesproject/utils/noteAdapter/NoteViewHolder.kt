@@ -6,14 +6,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.androidnotesproject.R
 import com.example.androidnotesproject.data.Note
 
-class NoteViewHolder(
-    private val view: View
-) : RecyclerView.ViewHolder(view) {
+class NoteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    fun bind(note: Note) {
-        view.findViewById<TextView>(R.id.titleItemTextView).text = note.title
-        view.findViewById<TextView>(R.id.dateItemTextView).text = note.date
-        view.findViewById<TextView>(R.id.messageItemTextView).text = note.message
+    private val titleItemTextView = view.findViewById<TextView>(R.id.titleItemTextView)
+    private val dateItemTextView = view.findViewById<TextView>(R.id.dateItemTextView)
+    private val messageItemTextView = view.findViewById<TextView>(R.id.messageItemTextView)
+
+    fun bind(note: Note, onTitleClick : (note : Note) -> Unit) {
+        titleItemTextView.text = note.title
+        dateItemTextView.text = note.date
+        messageItemTextView.text = note.message
+
+        titleItemTextView.setOnClickListener{
+            onTitleClick(note)
+        }
     }
 
 }

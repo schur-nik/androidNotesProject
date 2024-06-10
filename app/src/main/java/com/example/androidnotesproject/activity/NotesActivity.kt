@@ -14,12 +14,11 @@ import com.example.androidnotesproject.data.Note
 import com.example.androidnotesproject.data.NoteList
 import com.example.androidnotesproject.utils.addNoteToList
 import com.example.androidnotesproject.utils.noteAdapter.NoteAdapter
-import com.example.androidnotesproject.utils.noteAdapter.OnNoteClickImpl
 import com.example.androidnotesproject.utils.showToastShort
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class NotesActivity : AppCompatActivity(), OnNoteClickImpl {
+class NotesActivity : AppCompatActivity() {
 
     private val addNoteActivityResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -28,7 +27,7 @@ class NotesActivity : AppCompatActivity(), OnNoteClickImpl {
                 val message = result.data?.getStringExtra("EXTRA_NOTE_MESSAGE").toString()
                 addNoteToList(title, message)
                 findViewById<RecyclerView>(R.id.notesRecyclerView).run {
-                    adapter = NoteAdapter(this@NotesActivity).apply {
+                    adapter = NoteAdapter { note -> showToastShort(note.title) }.apply {
                         layoutManager = LinearLayoutManager(this@NotesActivity)
                         submitList(NoteList.list)
                     }
@@ -47,7 +46,7 @@ class NotesActivity : AppCompatActivity(), OnNoteClickImpl {
         addTestNotesToList()
 
         findViewById<RecyclerView>(R.id.notesRecyclerView).run {
-            adapter = NoteAdapter(this@NotesActivity).apply {
+            adapter = NoteAdapter { note -> showToastShort(note.title)  }.apply {
                 layoutManager = LinearLayoutManager(this@NotesActivity)
                 submitList(NoteList.list)
             }
@@ -60,10 +59,6 @@ class NotesActivity : AppCompatActivity(), OnNoteClickImpl {
         notesTextViewAddNote.setOnClickListener {
             addNoteActivityResultLauncher.launch(Intent(this, AddNoteActivity::class.java))
         }
-    }
-
-    override fun onClick(note: Note) {
-        showToastShort(note.title)
     }
 
     private fun addTestNotesToList() {
