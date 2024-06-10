@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/addNoteToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/main_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/addNoteTextViewBack"
+            style="@style/default_toolbar_clickable_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_note_textview_back"
+            app:drawableStartCompat="@drawable/ic_back" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/addNoteTitle"
+        style="@style/add_note_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/add_note_title_padding_10dp"
+
+        android:text="@string/add_note_textview_main_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addNoteToolbar" />
+
+    <EditText
+        android:id="@+id/addNoteEditTextTitle"
+        style="@style/default_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/add_note_edittext_margin_20dp"
+        android:layout_marginTop="@dimen/add_note_edittext_margin_25dp"
+        android:layout_marginEnd="@dimen/add_note_edittext_margin_20dp"
+        android:hint="@string/add_note_edittext_hint_title"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addNoteTitle" />
+
+    <EditText
+        android:id="@+id/addNoteEditTextMessage"
+        style="@style/default_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/add_note_edittext_margin_20dp"
+        android:layout_marginTop="@dimen/add_note_edittext_margin_25dp"
+        android:layout_marginEnd="@dimen/add_note_edittext_margin_20dp"
+        android:gravity="top|start"
+        android:hint="@string/add_note_edittext_hint_message"
+        android:inputType="textMultiLine"
+        android:maxLines="6"
+        android:minLines="6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addNoteEditTextTitle" />
+
+    <Button
+        android:id="@+id/addNoteButtonMain"
+        style="@style/default_main_active_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_note_button_main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addNoteEditTextMessage"
+        app:layout_constraintVertical_bias="0.55" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

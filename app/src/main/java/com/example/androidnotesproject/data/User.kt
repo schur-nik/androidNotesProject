@@ -1,4 +1,4 @@
-package com.example.androidnotesproject
+package com.example.androidnotesproject.data
 
 data class User(
     var email: String,
@@ -7,7 +7,7 @@ data class User(
     var password: String = "undefined"
 ) {
 
-    var notesList: HashMap<Int, String> = HashMap<Int, String>()
+    var notesList: List<Note> = arrayListOf()
 
 }
 

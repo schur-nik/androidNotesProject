@@ -1,4 +1,4 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources>
 
     <string name="splash_textview_app_name">Notes\nProject</string>
     <string name="splash_button_main">Discover features</string>
@@ -18,6 +18,15 @@
     <string name="login_edittext_hint_email">Email</string>
     <string name="login_edittext_hint_password">Password</string>
 
+    <string name="notes_textview_logout">Logout</string>
+    <string name="notes_textview_addnew">Add New</string>
+
+    <string name="add_note_textview_main_text">Add note</string>
+    <string name="add_note_edittext_hint_title">Title</string>
+    <string name="add_note_edittext_hint_message">Message</string>
+    <string name="add_note_textview_back">Back</string>
+    <string name="add_note_button_main">Add</string>
+
     <string name="error_default_required">Required field</string>
     <string name="error_default">Unknown error</string>
     <string name="error_name_length">First Name must be from 3 to 255 symbols</string>
@@ -30,4 +39,5 @@
 
     <string name="allowed_text_char">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="allowed_any_char">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-.!@#$%^:{}|*()?1234567890</string>
+
 </resources>

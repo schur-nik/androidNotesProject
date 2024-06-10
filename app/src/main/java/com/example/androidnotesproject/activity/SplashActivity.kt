@@ -1,11 +1,11 @@
-package com.example.androidnotesproject
+package com.example.androidnotesproject.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import com.example.androidnotesproject.R
 
 class SplashActivity : AppCompatActivity() {
 
@@ -23,7 +23,6 @@ class SplashActivity : AppCompatActivity() {
         splashTextViewToLogIn.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
-
     }
 
 }

@@ -1,69 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_blue">
+    android:background="@color/main_background">
 
     <LinearLayout
+        android:id="@+id/loginLinearLayout"
         android:layout_width="@dimen/linear_layout_width_340dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/layout_shape"
         android:orientation="vertical"
-        android:layout_gravity="top|center"
-        android:layout_marginTop="@dimen/linear_layout_margin_100dp"
         android:padding="@dimen/linear_layout_padding_30dp"
-        android:background="@drawable/layout_shape">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.20">
 
         <TextView
-            android:text="@string/login_textview_title"
             style="@style/default_title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:text="@string/login_textview_title" />
 
         <EditText
             android:id="@+id/loginEditTextEmail"
-            android:hint="@string/login_edittext_hint_email"
-            android:digits="@string/allowed_any_char"
-            android:inputType="textEmailAddress"
+            style="@style/default_edittext"
             android:layout_width="@dimen/linear_edittext_width_260dp"
             android:layout_height="wrap_content"
-            style="@style/default_edittext"
-
             android:layout_gravity="center|top"
-            android:layout_marginTop="@dimen/linear_edittext_margin_25dp" />
+            android:layout_marginTop="@dimen/linear_edittext_margin_25dp"
+            android:digits="@string/allowed_any_char"
+
+            android:hint="@string/login_edittext_hint_email"
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/loginEditTextPassword"
-            android:hint="@string/login_edittext_hint_password"
-            android:digits="@string/allowed_any_char"
-            android:inputType="textPassword"
+            style="@style/default_edittext"
             android:layout_width="@dimen/linear_edittext_width_260dp"
             android:layout_height="wrap_content"
-            style="@style/default_edittext"
-
             android:layout_gravity="center|top"
-            android:layout_marginTop="@dimen/linear_edittext_margin_25dp" />
+            android:layout_marginTop="@dimen/linear_edittext_margin_25dp"
+            android:digits="@string/allowed_any_char"
+
+            android:hint="@string/login_edittext_hint_password"
+            android:inputType="textPassword" />
 
     </LinearLayout>
 
     <Button
         android:id="@+id/loginButtonMain"
-        android:text="@string/login_button_main"
+        style="@style/default_main_active_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="@dimen/main_active_button_margin_140dp"
-        style="@style/default_main_active_button" />
+        android:text="@string/login_button_main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginLinearLayout"
+        app:layout_constraintVertical_bias="0.55" />
 
     <TextView
         android:id="@+id/loginTextViewToSignUp"
-        android:text="@string/login_textview_to_signup"
+        style="@style/default_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="@dimen/signature_textview_jump_margin_100dp"
         android:clickable="true"
-        style="@style/default_text" />
+        android:text="@string/login_textview_to_signup"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginButtonMain"
+        app:layout_constraintVertical_bias="0.10" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
