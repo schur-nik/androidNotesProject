@@ -2,9 +2,8 @@ package com.example.androidnotesproject.utils
 
 import com.example.androidnotesproject.data.Note
 import com.example.androidnotesproject.data.NoteList.list
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
 
-fun addNoteToList(title: String, message: String) {
-    list.add(Note(list.last().id+1, LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString(), title, message))
+fun addNoteToList(title: String, message: String, date: String) {
+    list.add(Note(list.last().id+1, SimpleDateFormat(DATE_FORMAT).parse(date), title, message))
 }

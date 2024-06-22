@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,20 +11,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.androidnotesproject.R
 import com.example.androidnotesproject.data.Note
 import com.example.androidnotesproject.data.NoteList
+import com.example.androidnotesproject.databinding.ActivityNotesBinding
 import com.example.androidnotesproject.utils.addNoteToList
 import com.example.androidnotesproject.utils.noteAdapter.NoteAdapter
 import com.example.androidnotesproject.utils.showToastShort
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import java.time.ZoneId
+import java.util.Date
 
 class NotesActivity : AppCompatActivity() {
+
+    private var binding: ActivityNotesBinding? = null
 
     private val addNoteActivityResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val title = result.data?.getStringExtra("EXTRA_NOTE_TITLE").toString()
-                val message = result.data?.getStringExtra("EXTRA_NOTE_MESSAGE").toString()
-                addNoteToList(title, message)
+                val title = result.data?.getStringExtra(AddNoteActivity.EXTRA_NOTE_TITLE).toString()
+                val message = result.data?.getStringExtra(AddNoteActivity.EXTRA_NOTE_MESSAGE).toString()
+                val date = result.data?.getStringExtra(AddNoteActivity.EXTRA_NOTE_DATE).toString()
+                addNoteToList(title, message, date)
                 findViewById<RecyclerView>(R.id.notesRecyclerView).run {
                     adapter = NoteAdapter { note -> showToastShort(note.title) }.apply {
                         layoutManager = LinearLayoutManager(this@NotesActivity)
@@ -37,26 +41,25 @@ class NotesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_notes)
-
-        val notesTextViewLogout: TextView = findViewById(R.id.notesTextViewLogout)
-        val notesTextViewAddNote: TextView = findViewById(R.id.notesTextViewAddNote)
+        binding = ActivityNotesBinding.inflate(layoutInflater).also {
+            setContentView(it.root)
+        }
 
         //Добавляем данные для теста, пока не реализована загрузка данных из БД\памяти
         addTestNotesToList()
 
-        findViewById<RecyclerView>(R.id.notesRecyclerView).run {
+        binding?.notesRecyclerView?.run {
             adapter = NoteAdapter { note -> showToastShort(note.title)  }.apply {
                 layoutManager = LinearLayoutManager(this@NotesActivity)
                 submitList(NoteList.list)
             }
         }
 
-        notesTextViewLogout.setOnClickListener {
+        binding?.notesTextViewLogout?.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
-        notesTextViewAddNote.setOnClickListener {
+        binding?.notesTextViewAddNote?.setOnClickListener {
             addNoteActivityResultLauncher.launch(Intent(this, AddNoteActivity::class.java))
         }
     }
@@ -65,7 +68,7 @@ class NotesActivity : AppCompatActivity() {
         NoteList.list.add(
             Note(
                 1,
-                LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString(),
+                Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()),
                 "Title1",
                 "Any text blablablablablablablablablabla"
             )
@@ -73,7 +76,7 @@ class NotesActivity : AppCompatActivity() {
         NoteList.list.add(
             Note(
                 2,
-                LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString(),
+                Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()),
                 "Title2",
                 "Any text blablablablablablablablablabla"
             )

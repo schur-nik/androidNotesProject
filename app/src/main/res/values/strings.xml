@@ -33,11 +33,13 @@
     <string name="error_pass_length">Password must be from 6 to 50 symbols</string>
     <string name="error_pass_regex">The password must contain at least 1 uppercase, 1 lowercase, 1 number, and at least 1 special character.</string>
     <string name="error_email_regex">Email must be in email format</string>
+    <string name="error_date_regex">Date must be in dd/mm/yyyy format</string>
 
     <string name="signup_successful_text">Registration successful</string>
     <string name="login_successful_text">Login successful</string>
 
     <string name="allowed_text_char">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="allowed_any_char">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-.!@#$%^:{}|*()?1234567890</string>
+    <string name="add_note_edittext_hint_date">dd/mm/yyyy</string>
 
 </resources>
