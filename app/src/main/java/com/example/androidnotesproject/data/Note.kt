@@ -1,10 +1,10 @@
 package com.example.androidnotesproject.data
 
-import java.util.Date
+import java.time.LocalDate
 
 data class Note(
     val id: Int,
-    val date: Date?,
+    val date: LocalDate,
     val title: String,
     val message: String
 )

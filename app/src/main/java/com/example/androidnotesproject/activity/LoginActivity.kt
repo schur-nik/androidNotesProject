@@ -2,14 +2,9 @@ package com.example.androidnotesproject.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.androidnotesproject.R
 import com.example.androidnotesproject.data.User
 import com.example.androidnotesproject.databinding.ActivityLoginBinding
-import com.example.androidnotesproject.databinding.ActivitySplashBinding
 import com.example.androidnotesproject.utils.*
 
 class LoginActivity : AppCompatActivity() {

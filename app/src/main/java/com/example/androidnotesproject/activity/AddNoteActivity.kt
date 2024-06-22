@@ -57,7 +57,7 @@ class AddNoteActivity : AppCompatActivity() {
                     }
                 }
 
-                addNoteValidate(addNoteEditTextDate.text.toString()).apply {
+                addNoteValidate(addNoteEditTextDate.text.toString(), "DATE").apply {
                     when (this) {
                         is ValidateResult.Invalid -> addNoteEditTextDate.error = getErrorString(errorCode)
                         else -> addNoteEditTextDate.error = null

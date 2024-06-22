@@ -7,8 +7,6 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.androidnotesproject.R
 import com.example.androidnotesproject.data.Note
 import com.example.androidnotesproject.data.NoteList
 import com.example.androidnotesproject.databinding.ActivityNotesBinding
@@ -16,8 +14,6 @@ import com.example.androidnotesproject.utils.addNoteToList
 import com.example.androidnotesproject.utils.noteAdapter.NoteAdapter
 import com.example.androidnotesproject.utils.showToastShort
 import java.time.LocalDate
-import java.time.ZoneId
-import java.util.Date
 
 class NotesActivity : AppCompatActivity() {
 
@@ -29,8 +25,10 @@ class NotesActivity : AppCompatActivity() {
                 val title = result.data?.getStringExtra(AddNoteActivity.EXTRA_NOTE_TITLE).toString()
                 val message = result.data?.getStringExtra(AddNoteActivity.EXTRA_NOTE_MESSAGE).toString()
                 val date = result.data?.getStringExtra(AddNoteActivity.EXTRA_NOTE_DATE).toString()
+
                 addNoteToList(title, message, date)
-                findViewById<RecyclerView>(R.id.notesRecyclerView).run {
+
+                binding?.notesRecyclerView?.run {
                     adapter = NoteAdapter { note -> showToastShort(note.title) }.apply {
                         layoutManager = LinearLayoutManager(this@NotesActivity)
                         submitList(NoteList.list)
@@ -49,7 +47,7 @@ class NotesActivity : AppCompatActivity() {
         addTestNotesToList()
 
         binding?.notesRecyclerView?.run {
-            adapter = NoteAdapter { note -> showToastShort(note.title)  }.apply {
+            adapter = NoteAdapter { note -> showToastShort(note.title) }.apply {
                 layoutManager = LinearLayoutManager(this@NotesActivity)
                 submitList(NoteList.list)
             }
@@ -68,7 +66,7 @@ class NotesActivity : AppCompatActivity() {
         NoteList.list.add(
             Note(
                 1,
-                Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                LocalDate.now(),
                 "Title1",
                 "Any text blablablablablablablablablabla"
             )
@@ -76,7 +74,7 @@ class NotesActivity : AppCompatActivity() {
         NoteList.list.add(
             Note(
                 2,
-                Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                LocalDate.now(),
                 "Title2",
                 "Any text blablablablablablablablablabla"
             )
@@ -84,6 +82,7 @@ class NotesActivity : AppCompatActivity() {
     }
 
     @SuppressLint("MissingSuperCall")
-    override fun onBackPressed() {}
+    override fun onBackPressed() {
+    }
 
 }
