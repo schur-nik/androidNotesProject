@@ -1,6 +1,8 @@
 package com.example.androidnotesproject.utils
 
 import com.example.androidnotesproject.R
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 private const val VALIDATE_NAME_LENGTH_MIN = 3
 private const val VALIDATE_NAME_LENGTH_MAX = 255
@@ -40,6 +42,12 @@ fun logInValidate(text: String, fieldType: String = "NULL"): ValidateResult {
 fun addNoteValidate(text: String, fieldType: String = "NULL"): ValidateResult {
     return when {
         text.isBlank() -> ValidateResult.Invalid(R.string.error_default_required)
+        fieldType == "DATE" -> try {
+            LocalDate.parse(text, DateTimeFormatter.ofPattern(DATE_FORMAT))
+            ValidateResult.Valid
+        } catch (e: Exception) {
+            ValidateResult.Invalid(R.string.error_date_regex)
+        }
         else -> ValidateResult.Valid
     }
 }

@@ -1,15 +1,15 @@
 package com.example.androidnotesproject.utils.noteAdapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.androidnotesproject.data.Note
+import com.example.androidnotesproject.data.NoteItem
 
-class NoteDiffUtil : DiffUtil.ItemCallback<Note>() {
+class NoteDiffUtil : DiffUtil.ItemCallback<NoteItem>() {
 
-    override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
+    override fun areItemsTheSame(oldItem: NoteItem, newItem: NoteItem): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {
-        return oldItem == newItem
+    override fun areContentsTheSame(oldItem: NoteItem, newItem: NoteItem): Boolean {
+        return true
     }
 }

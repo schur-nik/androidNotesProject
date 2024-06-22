@@ -1,26 +1,27 @@
 package com.example.androidnotesproject.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.androidnotesproject.R
+import com.example.androidnotesproject.databinding.ActivitySplashBinding
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
+
+    private var binding: ActivitySplashBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        binding = ActivitySplashBinding.inflate(layoutInflater).also {
+            setContentView(it.root)
+        }
 
-        val splashButtonMain: Button = findViewById(R.id.splashButtonMain)
-        val splashTextViewToLogIn: TextView = findViewById(R.id.splashTextViewToLogIn)
-
-        splashButtonMain.setOnClickListener {
+        binding?.splashButtonMain?.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
 
-        splashTextViewToLogIn.setOnClickListener {
+        binding?.splashTextViewToLogIn?.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
     }
