@@ -7,7 +7,7 @@ data class User(
     var password: String = "undefined"
 ) {
 
-    var notesList: List<Note> = arrayListOf()
+    var notesList: List<NoteItem> = arrayListOf()
 
 }
 

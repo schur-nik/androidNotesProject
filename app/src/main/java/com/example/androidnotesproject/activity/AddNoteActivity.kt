@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.androidnotesproject.databinding.ActivityAddNoteBinding
@@ -20,6 +21,7 @@ class AddNoteActivity : AppCompatActivity() {
         const val EXTRA_NOTE_TITLE = "noteTitle"
         const val EXTRA_NOTE_MESSAGE = "noteMessage"
         const val EXTRA_NOTE_DATE = "noteDate"
+        const val EXTRA_NOTE_SCHEDULED = "noteScheduled"
     }
 
     private var binding: ActivityAddNoteBinding? = null
@@ -32,6 +34,16 @@ class AddNoteActivity : AppCompatActivity() {
 
         binding?.addNoteTextViewBack?.setOnClickListener {
             finish()
+        }
+
+        binding?.run {
+            addNoteCheckBoxScheduled.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    addNoteEditTextDate.visibility = View.VISIBLE
+                } else {
+                    addNoteEditTextDate.visibility = View.INVISIBLE
+                }
+            }
         }
 
         binding?.run{
@@ -68,9 +80,11 @@ class AddNoteActivity : AppCompatActivity() {
                     val resultIntent = Intent()
                     resultIntent.putExtra(EXTRA_NOTE_TITLE, addNoteEditTextTitle.text.toString())
                     resultIntent.putExtra(EXTRA_NOTE_MESSAGE, addNoteEditTextMessage.text.toString())
-                    resultIntent.putExtra(EXTRA_NOTE_DATE, addNoteEditTextDate.text.toString())
+                    resultIntent.putExtra(EXTRA_NOTE_DATE, if (addNoteCheckBoxScheduled.isChecked) addNoteEditTextDate.text.toString() else LocalDate.now().toSimpleText())
+                    resultIntent.putExtra(EXTRA_NOTE_SCHEDULED, addNoteCheckBoxScheduled.isChecked)
                     setResult(Activity.RESULT_OK, resultIntent)
                     finish()
+
                 }
             }
         }

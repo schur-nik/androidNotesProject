@@ -26,6 +26,8 @@
     <string name="add_note_edittext_hint_message">Message</string>
     <string name="add_note_textview_back">Back</string>
     <string name="add_note_button_main">Add</string>
+    <string name="add_note_edittext_hint_date">dd/mm/yyyy</string>
+    <string name="add_note_textview_hint_scheduled">Scheduled notes</string>
 
     <string name="error_default_required">Required field</string>
     <string name="error_default">Unknown error</string>
@@ -40,6 +42,5 @@
 
     <string name="allowed_text_char">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="allowed_any_char">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-.!@#$%^:{}|*()?1234567890</string>
-    <string name="add_note_edittext_hint_date">dd/mm/yyyy</string>
 
 </resources>

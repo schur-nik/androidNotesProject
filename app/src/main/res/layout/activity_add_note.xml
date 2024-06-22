@@ -30,7 +30,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/add_note_title_padding_10dp"
-
         android:text="@string/add_note_textview_main_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addNoteToolbar" />
@@ -64,20 +63,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addNoteEditTextTitle" />
 
-    <EditText
-        android:id="@+id/addNoteEditTextDate"
-        style="@style/default_edittext"
+    <LinearLayout
+        android:id="@+id/addNoteLinearLayoutDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/add_note_edittext_margin_horizontal_20dp"
         android:layout_marginTop="@dimen/add_note_edittext_margin_top_25dp"
-        android:hint="@string/add_note_edittext_hint_date"
-        android:inputType="date"
-        android:maxLength="10"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addNoteEditTextMessage"
-        android:autofillHints="creditCardExpirationDate" />
+        app:layout_constraintTop_toBottomOf="@+id/addNoteEditTextMessage">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/addNoteCheckBoxScheduled"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+            <TextView
+                style="@style/default_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_note_textview_hint_scheduled" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/addNoteEditTextDate"
+            style="@style/default_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="creditCardExpirationDate"
+            android:hint="@string/add_note_edittext_hint_date"
+            android:inputType="date"
+            android:maxLength="10"
+            android:visibility="invisible" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/addNoteButtonMain"
@@ -88,7 +113,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addNoteEditTextDate"
+        app:layout_constraintTop_toBottomOf="@id/addNoteLinearLayoutDate"
         app:layout_constraintVertical_bias="0.55" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

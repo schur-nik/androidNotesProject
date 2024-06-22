@@ -1,10 +1,14 @@
 package com.example.androidnotesproject.utils
 
-import com.example.androidnotesproject.data.Note
-import com.example.androidnotesproject.data.NoteList.list
+import com.example.androidnotesproject.data.NoteItem
+import com.example.androidnotesproject.data.NoteList.noteList
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 fun addNoteToList(title: String, message: String, date: String) {
-    list.add(Note(list.last().id+1, LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT)), title, message))
+    noteList.add(NoteItem.Note(noteList.last().id+1, LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT)), title, message))
+}
+
+fun addScheduledNoteToList(title: String, message: String, date: String) {
+    noteList.add(NoteItem.ScheduledNote(noteList.last().id+1, LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT)), title, message))
 }
