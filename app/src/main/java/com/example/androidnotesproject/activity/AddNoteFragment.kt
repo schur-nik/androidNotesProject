@@ -4,10 +4,12 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import com.example.androidnotesproject.databinding.ActivityAddNoteBinding
+import androidx.fragment.app.Fragment
+import com.example.androidnotesproject.databinding.FragmentAddNoteBinding
 import com.example.androidnotesproject.utils.ValidateResult
 import com.example.androidnotesproject.utils.addNoteValidate
 import com.example.androidnotesproject.utils.getErrorString
@@ -15,7 +17,9 @@ import com.example.androidnotesproject.utils.toSimpleText
 import java.time.LocalDate
 import java.util.Calendar
 
-class AddNoteActivity : AppCompatActivity() {
+class AddNoteFragment : Fragment() {
+
+    private var binding: FragmentAddNoteBinding? = null
 
     companion object {
         const val EXTRA_NOTE_TITLE = "noteTitle"
@@ -24,16 +28,20 @@ class AddNoteActivity : AppCompatActivity() {
         const val EXTRA_NOTE_SCHEDULED = "noteScheduled"
     }
 
-    private var binding: ActivityAddNoteBinding? = null
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return FragmentAddNoteBinding.inflate(inflater, container, false).also { binding = it }.root
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityAddNoteBinding.inflate(layoutInflater).also {
-            setContentView(it.root)
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding?.addNoteTextViewBack?.setOnClickListener {
-            finish()
+            parentFragmentManager.setFragmentResult("ADD_NOTE_RESULT_BACK", Bundle())
+            parentFragmentManager.popBackStack()
         }
 
         binding?.run {
@@ -57,33 +65,47 @@ class AddNoteActivity : AppCompatActivity() {
             addNoteButtonMain.setOnClickListener {
                 addNoteValidate(addNoteEditTextTitle.text.toString()).apply {
                     when (this) {
-                        is ValidateResult.Invalid -> addNoteEditTextTitle.error = getErrorString(errorCode)
+                        is ValidateResult.Invalid -> addNoteEditTextTitle.error = requireContext().getErrorString(errorCode)
                         else -> addNoteEditTextTitle.error = null
                     }
                 }
 
                 addNoteValidate(addNoteEditTextMessage.text.toString()).apply {
                     when (this) {
-                        is ValidateResult.Invalid -> addNoteEditTextMessage.error = getErrorString(errorCode)
+                        is ValidateResult.Invalid -> addNoteEditTextMessage.error = requireContext().getErrorString(errorCode)
                         else -> addNoteEditTextMessage.error = null
                     }
                 }
 
                 addNoteValidate(addNoteEditTextDate.text.toString(), "DATE").apply {
                     when (this) {
-                        is ValidateResult.Invalid -> addNoteEditTextDate.error = getErrorString(errorCode)
+                        is ValidateResult.Invalid -> addNoteEditTextDate.error = requireContext().getErrorString(errorCode)
                         else -> addNoteEditTextDate.error = null
                     }
                 }
 
                 if (addNoteEditTextTitle.error.isNullOrBlank() && addNoteEditTextMessage.error.isNullOrBlank() && addNoteEditTextDate.error.isNullOrBlank()) {
-                    val resultIntent = Intent()
-                    resultIntent.putExtra(EXTRA_NOTE_TITLE, addNoteEditTextTitle.text.toString())
-                    resultIntent.putExtra(EXTRA_NOTE_MESSAGE, addNoteEditTextMessage.text.toString())
-                    resultIntent.putExtra(EXTRA_NOTE_DATE, if (addNoteCheckBoxScheduled.isChecked) addNoteEditTextDate.text.toString() else LocalDate.now().toSimpleText())
-                    resultIntent.putExtra(EXTRA_NOTE_SCHEDULED, addNoteCheckBoxScheduled.isChecked)
-                    setResult(Activity.RESULT_OK, resultIntent)
-                    finish()
+                    val result = Bundle().apply {
+                        putString(
+                            EXTRA_NOTE_TITLE,
+                            addNoteEditTextTitle.text.toString()
+                        )
+                        putString(
+                            EXTRA_NOTE_MESSAGE,
+                            addNoteEditTextMessage.text.toString()
+                        )
+                        putString(
+                            EXTRA_NOTE_DATE,
+                            if (addNoteCheckBoxScheduled.isChecked) addNoteEditTextDate.text.toString() else LocalDate.now()
+                                .toSimpleText()
+                        )
+                        putBoolean(
+                            EXTRA_NOTE_SCHEDULED,
+                            addNoteCheckBoxScheduled.isChecked
+                        )
+                    }
+                    parentFragmentManager.setFragmentResult("ADD_NOTE_RESULT_OK", result)
+                    parentFragmentManager.popBackStack()
 
                 }
             }

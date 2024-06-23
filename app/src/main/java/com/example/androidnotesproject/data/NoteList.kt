@@ -4,7 +4,9 @@ import java.time.LocalDate
 
 object NoteList {
 
-    val noteList : ArrayList<NoteItem> = arrayListOf(
+    private val subscribers = arrayListOf<Subscriber>()
+
+    private val noteList: ArrayList<NoteItem> = arrayListOf(
         NoteItem.Note(
             1,
             LocalDate.now(),
@@ -24,5 +26,30 @@ object NoteList {
             "Any text blablablablablablablablablabla"
         )
     )
+
+    fun getNoteList() = noteList
+
+    fun addNote(item: NoteItem) {
+        noteList.add(item)
+        notifySubscribers()
+    }
+
+    fun getNoteById(id: Int): NoteItem? {
+        return noteList.find { it.id == id }
+    }
+
+    fun subscribe(subscriber: Subscriber) {
+        subscribers.add(subscriber)
+    }
+
+    fun unsubscribe(subscriber: Subscriber) {
+        subscribers.remove(subscriber)
+    }
+
+    private fun notifySubscribers() {
+        subscribers.forEach {
+            it.update()
+        }
+    }
 
 }
