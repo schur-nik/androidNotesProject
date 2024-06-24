@@ -8,4 +8,7 @@
     <color name="main_blue">#0273CA</color>
     <color name="linear_layout_background">#260055FF</color>
 
+    <color name="today_date_note_background">#330273CA</color>
+    <color name="past_date_note_background">#33FF0000</color>
+
 </resources>

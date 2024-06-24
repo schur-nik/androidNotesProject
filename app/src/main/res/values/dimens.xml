@@ -8,6 +8,10 @@
     <dimen name="splash_textview_login_margin_100dp">100dp</dimen>
     <dimen name="splash_textview_app_name_textsize_55sp">55sp</dimen>
 
+    <dimen name="onboarding_textview_text_margin_140dp">140dp</dimen>
+    <dimen name="onboarding_textview_skip_padding_10dp">10dp</dimen>
+    <dimen name="onboarding_textview_app_name_margin_45dp">45dp</dimen>
+
     <dimen name="default_common_text_14sp">14sp</dimen>
     <dimen name="default_title_text_40sp">40sp</dimen>
 
@@ -22,9 +26,9 @@
     <dimen name="item_note_title_text_20sp">20sp</dimen>
     <dimen name="item_note_message_margin_text_10dp">10dp</dimen>
 
-    <dimen name="add_note_edittext_margin_25dp">25dp</dimen>
+    <dimen name="add_note_edittext_margin_top_25dp">25dp</dimen>
     <dimen name="add_note_title_text_25sp">25dp</dimen>
     <dimen name="add_note_title_padding_10dp">10dp</dimen>
-    <dimen name="add_note_edittext_margin_20dp">20dp</dimen>
+    <dimen name="add_note_edittext_margin_horizontal_20dp">20dp</dimen>
 
 </resources>

@@ -12,6 +12,11 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="default_clickable_text">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="splash_textview_app_name">
         <item name="android:textSize">@dimen/splash_textview_app_name_textsize_55sp</item>
         <item name="android:fontFamily">@font/aclonica</item>
