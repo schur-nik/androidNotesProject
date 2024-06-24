@@ -25,19 +25,11 @@ class SplashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.splashButtonMain?.setOnClickListener {
-            parentFragmentManager
-                .beginTransaction()
-                .replace(R.id.mainFrame, OnboardingViewPagerFragment())
-                .addToBackStack(null)
-                .commit()
+            navigator().startFragment(OnboardingViewPagerFragment())
         }
 
         binding?.splashTextViewToLogIn?.setOnClickListener {
-            parentFragmentManager
-                .beginTransaction()
-                .replace(R.id.mainFrame, LoginFragment())
-                .addToBackStack(null)
-                .commit()
+            navigator().startFragment(LoginFragment())
         }
     }
 

@@ -31,7 +31,7 @@ class NotesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Обработка нажатия кнопки назад
-//        addBackPressCallback()
+        addBackPressCallback()
 
         parentFragmentManager.setFragmentResultListener("ADD_NOTE_RESULT_OK", this) { requestKey, bundle ->
             val title = bundle.getString(AddNoteFragment.EXTRA_NOTE_TITLE).toString()
@@ -50,18 +50,11 @@ class NotesFragment : Fragment() {
         setList()
 
         binding?.notesTextViewLogout?.setOnClickListener {
-            parentFragmentManager
-                .beginTransaction()
-                .replace(R.id.mainFrame, LoginFragment())
-                .commit()
+            navigator().startFragment(LoginFragment())
         }
 
         binding?.notesTextViewAddNote?.setOnClickListener {
-            parentFragmentManager
-                .beginTransaction()
-                .add(R.id.mainFrame, AddNoteFragment())
-                .addToBackStack(null)
-                .commit()
+            navigator().addFragment(AddNoteFragment())
         }
     }
 
@@ -75,41 +68,35 @@ class NotesFragment : Fragment() {
         }
     }
 
-//    private var backPressedCallback: OnBackPressedCallback? = null
-//    private var backStackListener = FragmentManager.OnBackStackChangedListener {
-//        val currentFragment = parentFragmentManager.findFragmentById(R.id.mainFrame)
-//        backPressedCallback?.isEnabled = currentFragment is NotesFragment
-//    }
-//    private fun addBackPressCallback() {
-//        backPressedCallback = object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                AlertDialog.Builder(context).apply {
-//                    setTitle(getString(R.string.notes_textview_logout))
-//                    setMessage(getString(R.string.notes_alert_question))
-//                    setPositiveButton(getString(R.string.notes_alert_answer_yes)) { dialog, which ->
-//                        parentFragmentManager.removeOnBackStackChangedListener(backStackListener)
-//                        parentFragmentManager
-//                            .beginTransaction()
-//                            .replace(R.id.mainFrame, SplashFragment())
-//                            .commit()
-//                        requireActivity().supportFragmentManager.popBackStack(
-//                            null,
-//                            FragmentManager.POP_BACK_STACK_INCLUSIVE
-//                        )
-//                    }
-//                    setNegativeButton(getString(R.string.notes_alert_answer_no)) { dialog, which ->
-//                        dialog.dismiss()
-//                    }
-//                    setCancelable(false)
-//                    create().show()
-//                }
-//            }
-//        }
-//        requireActivity().onBackPressedDispatcher.addCallback(
-//            viewLifecycleOwner,
-//            backPressedCallback as OnBackPressedCallback
-//        )
-//        parentFragmentManager.addOnBackStackChangedListener(backStackListener)
-//    }
+    private var backPressedCallback: OnBackPressedCallback? = null
+    private var backStackListener = FragmentManager.OnBackStackChangedListener {
+        val currentFragment = parentFragmentManager.findFragmentById(R.id.mainFrame)
+        backPressedCallback?.isEnabled = currentFragment is NotesFragment
+    }
+    private fun addBackPressCallback() {
+        backPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                AlertDialog.Builder(context).apply {
+                    setTitle(getString(R.string.notes_textview_logout))
+                    setMessage(getString(R.string.notes_alert_question))
+                    setPositiveButton(getString(R.string.notes_alert_answer_yes)) { dialog, which ->
+                        parentFragmentManager.removeOnBackStackChangedListener(backStackListener)
+                        navigator().startFragment(SplashFragment())
+                        navigator().popBackStackAll()
+                    }
+                    setNegativeButton(getString(R.string.notes_alert_answer_no)) { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    setCancelable(false)
+                    create().show()
+                }
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            backPressedCallback as OnBackPressedCallback
+        )
+        parentFragmentManager.addOnBackStackChangedListener(backStackListener)
+    }
 
 }

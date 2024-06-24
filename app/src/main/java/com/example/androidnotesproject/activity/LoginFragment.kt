@@ -27,11 +27,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.loginTextViewToSignUp?.setOnClickListener{
-            parentFragmentManager
-                .beginTransaction()
-                .replace(R.id.mainFrame, SignUpFragment())
-                .addToBackStack(null)
-                .commit()
+            navigator().startFragment(SignUpFragment())
         }
 
         binding?.run {
@@ -59,11 +55,7 @@ class LoginFragment : Fragment() {
                         )
                     )
 
-                    parentFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.mainFrame, NotesFragment())
-                        .addToBackStack(null)
-                        .commit()
+                    navigator().startFragment(NotesFragment())
 
                 }
             }

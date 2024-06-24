@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.androidnotesproject.R
 import com.example.androidnotesproject.databinding.FragmentOnboardingTwoBinding
 
 class OnboardingTwoFragment : Fragment() {
@@ -24,11 +23,8 @@ class OnboardingTwoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.onboardingTwoTextViewSkip?.setOnClickListener{
-            parentFragmentManager
-                .beginTransaction()
-                .replace(R.id.mainFrame, LoginFragment())
-                .addToBackStack(null)
-                .commit()
+            navigator().cancelFragment()
+            navigator().startFragment(LoginFragment())
         }
     }
 
