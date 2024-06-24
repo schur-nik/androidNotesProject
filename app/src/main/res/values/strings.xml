@@ -4,6 +4,11 @@
     <string name="splash_button_main">Discover features</string>
     <string name="splash_textview_to_login">You have an account? <b>Log-in</b></string>
 
+    <string name="onboarding_textview_app_name">Notes Project</string>
+    <string name="onboarding_textview_skip">Skip</string>
+    <string name="onboarding_textview_text_one">Capture ideas and tasks effortlessly with Notes Project. Your thoughts, organized and accessible anywhere.</string>
+    <string name="onboarding_textview_text_two">Stay on top of your schedule with color-coded notes. Overdue items demand attention in red, while todays tasks shine in blue. Embrace efficiency with Notes Project today!</string>
+
     <string name="signup_button_main">Sign-up</string>
     <string name="signup_textview_to_login">You have an account? <b>Log-in</b></string>
     <string name="signup_textview_title">Sign-up</string>
@@ -11,15 +16,20 @@
     <string name="signup_edittext_hint_last_name">Last Name</string>
     <string name="signup_edittext_hint_email">Email</string>
     <string name="signup_edittext_hint_password">Password</string>
+    <string name="signup_successful_text">Registration successful</string>
 
     <string name="login_button_main">Log-in</string>
     <string name="login_textview_to_signup">Return to <b>Sign-up</b></string>
     <string name="login_textview_title">Log-in</string>
     <string name="login_edittext_hint_email">Email</string>
     <string name="login_edittext_hint_password">Password</string>
+    <string name="login_successful_text">Login successful</string>
 
     <string name="notes_textview_logout">Logout</string>
     <string name="notes_textview_addnew">Add New</string>
+    <string name="notes_alert_question">Are you sure to logout?</string>
+    <string name="notes_alert_answer_yes">Yes</string>
+    <string name="notes_alert_answer_no">No</string>
 
     <string name="add_note_textview_main_text">Add note</string>
     <string name="add_note_edittext_hint_title">Title</string>
@@ -36,9 +46,6 @@
     <string name="error_pass_regex">The password must contain at least 1 uppercase, 1 lowercase, 1 number, and at least 1 special character.</string>
     <string name="error_email_regex">Email must be in email format</string>
     <string name="error_date_regex">Date must be in dd/mm/yyyy format</string>
-
-    <string name="signup_successful_text">Registration successful</string>
-    <string name="login_successful_text">Login successful</string>
 
     <string name="allowed_text_char">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="allowed_any_char">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-.!@#$%^:{}|*()?1234567890</string>

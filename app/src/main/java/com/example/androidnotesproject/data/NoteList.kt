@@ -10,20 +10,29 @@ object NoteList {
         NoteItem.Note(
             1,
             LocalDate.now(),
-            "Title1",
-            "Any text blablablablablablablablablabla"
-        ),
-        NoteItem.Note(
-            2,
-            LocalDate.now(),
-            "Title2",
-            "Any text blablablablablablablablablabla"
+            "Shopping list",
+            "Zucchini x 1 kg\n" +
+                    "Cucumber x 2\n" +
+                    "Milk x 1l\n" +
+                    "Bread x 1"
         ),
         NoteItem.ScheduledNote(
+            2,
+            LocalDate.now(),
+            "HOSPITAL 10:30",
+            "Going to the hospital: Franche-Conte, 44"
+        ),
+        NoteItem.Note(
             3,
             LocalDate.now(),
-            "TitleTEST",
-            "Any text blablablablablablablablablabla"
+            "Homework",
+            "Working on homework"
+        ),
+        NoteItem.ScheduledNote(
+            4,
+            LocalDate.now().minusDays(1),
+            "Sister's birthday",
+            "Congratulate sister with birthday"
         )
     )
 
