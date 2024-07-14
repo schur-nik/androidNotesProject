@@ -1,10 +1,10 @@
-package com.example.androidnotesproject.utils.noteAdapter
+package com.example.androidnotesproject.ui.notes.noteAdapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidnotesproject.R
 import com.example.androidnotesproject.data.NoteItem
 import com.example.androidnotesproject.databinding.ItemScheduledNoteBinding
-import com.example.androidnotesproject.utils.toSimpleText
+import com.example.androidnotesproject.extensions.toSimpleText
 import java.time.LocalDate
 
 class ScheduledNoteViewHolder(private val binding: ItemScheduledNoteBinding) : RecyclerView.ViewHolder(binding.root) {

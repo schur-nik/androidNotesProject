@@ -1,4 +1,4 @@
-package com.example.androidnotesproject.utils
+package com.example.androidnotesproject.extensions
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
