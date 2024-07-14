@@ -1,4 +1,4 @@
-package com.example.androidnotesproject.activity
+package com.example.androidnotesproject.ui.notes
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -8,16 +8,23 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidnotesproject.R
-import com.example.androidnotesproject.data.NoteList
+import com.example.androidnotesproject.data.NoteItem
 import com.example.androidnotesproject.databinding.FragmentNotesBinding
-import com.example.androidnotesproject.utils.*
-import com.example.androidnotesproject.utils.noteAdapter.NoteAdapter
+import com.example.androidnotesproject.extensions.showToastShort
+import com.example.androidnotesproject.ui.splash.SplashFragment
+import com.example.androidnotesproject.ui.addnote.AddNoteFragment
+import com.example.androidnotesproject.ui.login.LoginFragment
+import com.example.androidnotesproject.navigation.navigator
+import com.example.androidnotesproject.ui.notes.noteAdapter.NoteAdapter
 
 class NotesFragment : Fragment() {
 
     private var binding: FragmentNotesBinding? = null
+
+    private val viewModel : NotesViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,42 +36,34 @@ class NotesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //Обработка нажатия кнопки назад
-        addBackPressCallback()
-
-        parentFragmentManager.setFragmentResultListener("ADD_NOTE_RESULT_OK", this) { requestKey, bundle ->
-            val title = bundle.getString(AddNoteFragment.EXTRA_NOTE_TITLE).toString()
-            val message = bundle.getString(AddNoteFragment.EXTRA_NOTE_MESSAGE).toString()
-            val date = bundle.getString(AddNoteFragment.EXTRA_NOTE_DATE).toString()
-            val scheduled = bundle.getBoolean(AddNoteFragment.EXTRA_NOTE_SCHEDULED)
-
-            if (scheduled)
-                addScheduledNoteToList(title, message, date)
-            else
-                addNoteToList(title, message, date)
-
-            setList()
+        viewModel.list.observe(viewLifecycleOwner) {
+            setList(it)
         }
-
-        setList()
+        viewModel.getNoteList()
 
         binding?.notesTextViewLogout?.setOnClickListener {
-            navigator().startFragment(LoginFragment())
+            parentFragmentManager.removeOnBackStackChangedListener(backStackListener)
+//            navigator().popBackStackAll()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.mainFrame, LoginFragment())
+                .commit()
         }
 
         binding?.notesTextViewAddNote?.setOnClickListener {
             navigator().addFragment(AddNoteFragment())
         }
+
+        //Обработка нажатия кнопки назад
+        addBackPressCallback()
     }
 
-    private fun setList() {
+    private fun setList(listNote : List<NoteItem>) {
         binding?.notesRecyclerView?.run {
             if (adapter == null) {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = NoteAdapter { note -> requireContext().showToastShort(note.title) }
             }
-            (adapter as? NoteAdapter)?.submitList(NoteList.getNoteList())
+            (adapter as? NoteAdapter)?.submitList(listNote)
         }
     }
 
@@ -73,18 +72,19 @@ class NotesFragment : Fragment() {
         val currentFragment = parentFragmentManager.findFragmentById(R.id.mainFrame)
         backPressedCallback?.isEnabled = currentFragment is NotesFragment
     }
+
     private fun addBackPressCallback() {
         backPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 AlertDialog.Builder(context).apply {
                     setTitle(getString(R.string.notes_textview_logout))
                     setMessage(getString(R.string.notes_alert_question))
-                    setPositiveButton(getString(R.string.notes_alert_answer_yes)) { dialog, which ->
+                    setPositiveButton(getString(R.string.notes_alert_answer_yes)) { _, _ ->
                         parentFragmentManager.removeOnBackStackChangedListener(backStackListener)
                         navigator().startFragment(SplashFragment())
                         navigator().popBackStackAll()
                     }
-                    setNegativeButton(getString(R.string.notes_alert_answer_no)) { dialog, which ->
+                    setNegativeButton(getString(R.string.notes_alert_answer_no)) { dialog, _ ->
                         dialog.dismiss()
                     }
                     setCancelable(false)

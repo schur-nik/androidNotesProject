@@ -1,13 +1,14 @@
-package com.example.androidnotesproject.activity
+package com.example.androidnotesproject.ui.splash
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.androidnotesproject.R
 import com.example.androidnotesproject.databinding.FragmentSplashBinding
-import com.example.androidnotesproject.fragment.OnboardingViewPagerFragment
+import com.example.androidnotesproject.ui.onboarding.OnboardingViewPagerFragment
+import com.example.androidnotesproject.ui.login.LoginFragment
+import com.example.androidnotesproject.navigation.navigator
 
 class SplashFragment : Fragment() {
 

@@ -1,4 +1,6 @@
-package com.example.androidnotesproject.data
+package com.example.androidnotesproject.db
+
+import com.example.androidnotesproject.data.NoteItem
 
 data class User(
     var email: String,

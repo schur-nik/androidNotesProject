@@ -1,4 +1,4 @@
-package com.example.androidnotesproject.utils
+package com.example.androidnotesproject.extensions
 
 import android.content.Context
 import android.widget.Toast

@@ -1,11 +1,9 @@
-package com.example.androidnotesproject.utils.noteAdapter
+package com.example.androidnotesproject.ui.notes.noteAdapter
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidnotesproject.R
 import com.example.androidnotesproject.data.NoteItem
 import com.example.androidnotesproject.databinding.ItemNoteBinding
-import com.example.androidnotesproject.utils.toSimpleText
-import java.time.LocalDate
+import com.example.androidnotesproject.extensions.toSimpleText
 
 class NoteViewHolder(private val binding: ItemNoteBinding) : RecyclerView.ViewHolder(binding.root) {
 
