@@ -24,6 +24,7 @@
     <string name="login_edittext_hint_email">Email</string>
     <string name="login_edittext_hint_password">Password</string>
     <string name="login_successful_text">Login successful</string>
+    <string name="login_unsuccessful_text">Login unsuccessful</string>
 
     <string name="notes_textview_logout">Logout</string>
     <string name="notes_textview_addnew">Add New</string>

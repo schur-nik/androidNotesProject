@@ -1,7 +1,7 @@
 package com.example.androidnotesproject.ui.notes.noteAdapter
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidnotesproject.data.NoteItem
+import com.example.androidnotesproject.models.NoteItem
 import com.example.androidnotesproject.databinding.ItemNoteBinding
 import com.example.androidnotesproject.extensions.toSimpleText
 

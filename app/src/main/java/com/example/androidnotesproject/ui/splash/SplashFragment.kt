@@ -9,6 +9,7 @@ import com.example.androidnotesproject.databinding.FragmentSplashBinding
 import com.example.androidnotesproject.ui.onboarding.OnboardingViewPagerFragment
 import com.example.androidnotesproject.ui.login.LoginFragment
 import com.example.androidnotesproject.navigation.navigator
+import com.example.androidnotesproject.repositories.SharedPreferencesRepository
 
 class SplashFragment : Fragment() {
 
@@ -26,11 +27,12 @@ class SplashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.splashButtonMain?.setOnClickListener {
-            navigator().startFragment(OnboardingViewPagerFragment())
+            navigator().replaceFragment(OnboardingViewPagerFragment())
         }
 
         binding?.splashTextViewToLogIn?.setOnClickListener {
-            navigator().startFragment(LoginFragment())
+            SharedPreferencesRepository.setFirstLaunch()
+            navigator().replaceFragment(LoginFragment())
         }
     }
 

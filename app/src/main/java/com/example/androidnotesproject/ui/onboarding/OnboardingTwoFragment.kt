@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.androidnotesproject.databinding.FragmentOnboardingTwoBinding
 import com.example.androidnotesproject.ui.login.LoginFragment
 import com.example.androidnotesproject.navigation.navigator
+import com.example.androidnotesproject.repositories.SharedPreferencesRepository
 
 class OnboardingTwoFragment : Fragment() {
 
@@ -25,8 +26,9 @@ class OnboardingTwoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.onboardingTwoTextViewSkip?.setOnClickListener{
+            SharedPreferencesRepository.setFirstLaunch()
             navigator().cancelFragment()
-            navigator().startFragment(LoginFragment())
+            navigator().replaceFragment(LoginFragment())
         }
     }
 

@@ -5,19 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidnotesproject.R
-import com.example.androidnotesproject.data.NoteItem
+import com.example.androidnotesproject.models.NoteItem
 import com.example.androidnotesproject.databinding.FragmentNotesBinding
 import com.example.androidnotesproject.extensions.showToastShort
-import com.example.androidnotesproject.ui.splash.SplashFragment
 import com.example.androidnotesproject.ui.addnote.AddNoteFragment
 import com.example.androidnotesproject.ui.login.LoginFragment
 import com.example.androidnotesproject.navigation.navigator
+import com.example.androidnotesproject.repositories.SharedPreferencesRepository
 import com.example.androidnotesproject.ui.notes.noteAdapter.NoteAdapter
 
 class NotesFragment : Fragment() {
@@ -42,19 +40,13 @@ class NotesFragment : Fragment() {
         viewModel.getNoteList()
 
         binding?.notesTextViewLogout?.setOnClickListener {
-            parentFragmentManager.removeOnBackStackChangedListener(backStackListener)
-//            navigator().popBackStackAll()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.mainFrame, LoginFragment())
-                .commit()
+            alertLogout()
         }
 
         binding?.notesTextViewAddNote?.setOnClickListener {
             navigator().addFragment(AddNoteFragment())
         }
 
-        //Обработка нажатия кнопки назад
-        addBackPressCallback()
     }
 
     private fun setList(listNote : List<NoteItem>) {
@@ -67,36 +59,20 @@ class NotesFragment : Fragment() {
         }
     }
 
-    private var backPressedCallback: OnBackPressedCallback? = null
-    private var backStackListener = FragmentManager.OnBackStackChangedListener {
-        val currentFragment = parentFragmentManager.findFragmentById(R.id.mainFrame)
-        backPressedCallback?.isEnabled = currentFragment is NotesFragment
-    }
-
-    private fun addBackPressCallback() {
-        backPressedCallback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                AlertDialog.Builder(context).apply {
-                    setTitle(getString(R.string.notes_textview_logout))
-                    setMessage(getString(R.string.notes_alert_question))
-                    setPositiveButton(getString(R.string.notes_alert_answer_yes)) { _, _ ->
-                        parentFragmentManager.removeOnBackStackChangedListener(backStackListener)
-                        navigator().startFragment(SplashFragment())
-                        navigator().popBackStackAll()
-                    }
-                    setNegativeButton(getString(R.string.notes_alert_answer_no)) { dialog, _ ->
-                        dialog.dismiss()
-                    }
-                    setCancelable(false)
-                    create().show()
-                }
+    private fun alertLogout() {
+        AlertDialog.Builder(requireContext()).apply {
+            setTitle(getString(R.string.notes_textview_logout))
+            setMessage(getString(R.string.notes_alert_question))
+            setPositiveButton(getString(R.string.notes_alert_answer_yes)) { _, _ ->
+                SharedPreferencesRepository.clearUserData()
+                navigator().replaceFragment(LoginFragment(), false)
             }
+            setNegativeButton(getString(R.string.notes_alert_answer_no)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            setCancelable(true)
+            create().show()
         }
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            backPressedCallback as OnBackPressedCallback
-        )
-        parentFragmentManager.addOnBackStackChangedListener(backStackListener)
     }
 
 }

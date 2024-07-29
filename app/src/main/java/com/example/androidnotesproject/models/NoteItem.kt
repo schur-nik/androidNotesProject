@@ -1,4 +1,4 @@
-package com.example.androidnotesproject.data
+package com.example.androidnotesproject.models
 
 import java.time.LocalDate
 

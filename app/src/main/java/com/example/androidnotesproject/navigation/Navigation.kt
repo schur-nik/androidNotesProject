@@ -4,9 +4,9 @@ import androidx.fragment.app.Fragment
 
 interface Navigation {
 
-    fun startFragment(fragment: Fragment, backStackName: String? = null)
+    fun replaceFragment(fragment: Fragment, backStack: Boolean = true)
 
-    fun addFragment(fragment: Fragment, backStackName: String? = null)
+    fun addFragment(fragment: Fragment, backStack: Boolean = true)
 
     fun cancelFragment()
 
