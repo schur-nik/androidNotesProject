@@ -8,6 +8,10 @@
     <dimen name="splash_textview_login_margin_100dp">100dp</dimen>
     <dimen name="splash_textview_app_name_textsize_55sp">55sp</dimen>
 
+    <dimen name="onboarding_textview_text_margin_140dp">140dp</dimen>
+    <dimen name="onboarding_textview_skip_padding_10dp">10dp</dimen>
+    <dimen name="onboarding_textview_app_name_margin_45dp">45dp</dimen>
+
     <dimen name="default_common_text_14sp">14sp</dimen>
     <dimen name="default_title_text_40sp">40sp</dimen>
 
