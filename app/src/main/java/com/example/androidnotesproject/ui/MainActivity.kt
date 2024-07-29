@@ -1,10 +1,12 @@
-package com.example.androidnotesproject.activity
+package com.example.androidnotesproject.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.androidnotesproject.R
+import com.example.androidnotesproject.navigation.Navigation
+import com.example.androidnotesproject.ui.splash.SplashFragment
 
 class MainActivity : AppCompatActivity(), Navigation {
 
@@ -17,17 +19,17 @@ class MainActivity : AppCompatActivity(), Navigation {
             .commit()
     }
 
-    override fun startFragment(fragment: Fragment) {
+    override fun startFragment(fragment: Fragment, backStackName: String?) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.mainFrame, fragment)
-            .addToBackStack(null)
+            .addToBackStack(backStackName)
             .commit()
     }
 
-    override fun addFragment(fragment: Fragment) {
+    override fun addFragment(fragment: Fragment, backStackName: String?) {
         supportFragmentManager.beginTransaction()
             .add(R.id.mainFrame, fragment)
-            .addToBackStack(null)
+            .addToBackStack(backStackName)
             .commit()
     }
 

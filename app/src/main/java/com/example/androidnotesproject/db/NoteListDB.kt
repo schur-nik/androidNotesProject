@@ -1,10 +1,9 @@
-package com.example.androidnotesproject.data
+package com.example.androidnotesproject.db
 
+import com.example.androidnotesproject.data.NoteItem
 import java.time.LocalDate
 
-object NoteList {
-
-    private val subscribers = arrayListOf<Subscriber>()
+object NoteListDB {
 
     private val noteList: ArrayList<NoteItem> = arrayListOf(
         NoteItem.Note(
@@ -37,6 +36,8 @@ object NoteList {
     )
 
     fun getNoteList() = noteList
+
+    private val subscribers = arrayListOf<Subscriber>()
 
     fun addNote(item: NoteItem) {
         noteList.add(item)

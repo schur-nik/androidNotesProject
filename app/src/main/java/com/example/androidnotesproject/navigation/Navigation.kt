@@ -1,12 +1,12 @@
-package com.example.androidnotesproject.activity
+package com.example.androidnotesproject.navigation
 
 import androidx.fragment.app.Fragment
 
 interface Navigation {
 
-    fun startFragment(fragment: Fragment)
+    fun startFragment(fragment: Fragment, backStackName: String? = null)
 
-    fun addFragment(fragment: Fragment)
+    fun addFragment(fragment: Fragment, backStackName: String? = null)
 
     fun cancelFragment()
 
