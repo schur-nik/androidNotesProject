@@ -2,20 +2,43 @@ package com.example.androidnotesproject.utils.noteAdapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.FrameLayout
 import androidx.recyclerview.widget.ListAdapter
-import com.example.androidnotesproject.R
-import com.example.androidnotesproject.data.Note
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.androidnotesproject.data.NoteItem
+import com.example.androidnotesproject.databinding.ItemNoteBinding
+import com.example.androidnotesproject.databinding.ItemScheduledNoteBinding
 
-class NoteAdapter(private val onTitleClick : (note : Note) -> Unit) : ListAdapter<Note, NoteViewHolder>(NoteDiffUtil()) {
+enum class NoteType(val id: Int) {
+    COMMON_NOTE(1), SCHEDULED_NOTE(2)
+}
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
-        return NoteViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_note, parent, false)
-        )
+class NoteAdapter(private val onTitleClick: (note: NoteItem) -> Unit) :
+    ListAdapter<NoteItem, ViewHolder>(NoteDiffUtil()) {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return when (viewType) {
+            NoteType.COMMON_NOTE.id -> NoteViewHolder(
+                ItemNoteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            )
+            NoteType.SCHEDULED_NOTE.id -> ScheduledNoteViewHolder(
+                ItemScheduledNoteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            )
+            else -> object : ViewHolder(FrameLayout(parent.context)) {}
+        }
     }
 
-    override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-        holder.bind(getItem(position), onTitleClick)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        when(val item = getItem(position)) {
+            is NoteItem.Note -> (holder as? NoteViewHolder)?.bind(item, onTitleClick)
+            is NoteItem.ScheduledNote -> (holder as? ScheduledNoteViewHolder)?.bind(item, onTitleClick)
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (getItem(position)) {
+            is NoteItem.Note -> NoteType.COMMON_NOTE.id
+            is NoteItem.ScheduledNote -> NoteType.SCHEDULED_NOTE.id
+        }
     }
 }
