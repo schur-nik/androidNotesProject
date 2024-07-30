@@ -6,12 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.androidnotesproject.db.User
+import com.example.androidnotesproject.db.entities.UserEntity
 import com.example.androidnotesproject.databinding.FragmentSignupBinding
-import com.example.androidnotesproject.extensions.getErrorString
 import com.example.androidnotesproject.ui.login.LoginFragment
 import com.example.androidnotesproject.navigation.navigator
-import com.example.androidnotesproject.ui.login.LoginViewModel
 import com.example.androidnotesproject.utils.*
 
 class SignUpFragment : Fragment() {
@@ -32,47 +30,40 @@ class SignUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.signupTextViewToLogin?.setOnClickListener {
-            navigator().startFragment(LoginFragment())
+            navigator().replaceFragment(LoginFragment())
         }
 
         binding?.run {
             signupButtonMain.setOnClickListener {
-                viewModel.signUpValidate(signupEditTextFirstName.text.toString(), "FIRST_NAME").apply {
-                    when (this) {
-                        is ValidateResult.Invalid -> signupEditTextFirstName.error =
-                            requireContext().getErrorString(errorCode)
-                        else -> signupEditTextFirstName.error = null
+                signupEditTextFirstName.apply {
+                    viewModel.signUpValidate(text.toString(), "FIRST_NAME").also { validateResult ->
+                        setFieldError(this, validateResult)
                     }
                 }
 
-                viewModel.signUpValidate(signupEditTextEmail.text.toString(), "EMAIL_ADDRESS").apply {
-                    when (this) {
-                        is ValidateResult.Invalid -> signupEditTextEmail.error =
-                            requireContext().getErrorString(errorCode)
-                        else -> signupEditTextEmail.error = null
-                    }
+                signupEditTextEmail.apply {
+                    viewModel.signUpValidate(text.toString(), "EMAIL_ADDRESS")
+                        .also { validateResult ->
+                            setFieldError(this, validateResult)
+                        }
                 }
 
-                viewModel.signUpValidate(signupEditTextPassword.text.toString(), "PASSWORD").apply {
-                    when (this) {
-                        is ValidateResult.Invalid -> signupEditTextPassword.error =
-                            requireContext().getErrorString(errorCode)
-                        else -> signupEditTextPassword.error = null
+                signupEditTextPassword.apply {
+                    viewModel.signUpValidate(text.toString(), "PASSWORD").also { validateResult ->
+                        setFieldError(this, validateResult)
                     }
                 }
 
                 if (signupEditTextFirstName.error.isNullOrBlank() && signupEditTextEmail.error.isNullOrBlank() && signupEditTextPassword.error.isNullOrBlank()) {
                     viewModel.signUp(
                         context = requireContext(),
-                        user = User(
-                            email = signupEditTextEmail.text.toString(),
-                            firstname = signupEditTextFirstName.text.toString(),
-                            lastname = signupEditTextLastName.text.toString(),
-                            password = signupEditTextPassword.text.toString()
-                        )
+                        email = signupEditTextEmail.text.toString(),
+                        firstname = signupEditTextFirstName.text.toString(),
+                        lastname = signupEditTextLastName.text.toString(),
+                        password = signupEditTextPassword.text.toString()
                     )
 
-                    navigator().startFragment(LoginFragment())
+                    navigator().replaceFragment(LoginFragment())
                 }
             }
         }

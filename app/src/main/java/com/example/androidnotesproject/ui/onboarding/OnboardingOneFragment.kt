@@ -1,7 +1,6 @@
 package com.example.androidnotesproject.ui.onboarding
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.androidnotesproject.databinding.FragmentOnboardingOneBinding
 import com.example.androidnotesproject.ui.login.LoginFragment
 import com.example.androidnotesproject.navigation.navigator
+import com.example.androidnotesproject.repositories.SharedPreferencesRepository
 
 class OnboardingOneFragment : Fragment() {
 
@@ -19,7 +19,6 @@ class OnboardingOneFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.e("test OnboardingOneFragment = ", container.toString())
         return FragmentOnboardingOneBinding.inflate(inflater, container, false).also { binding = it }.root
     }
 
@@ -27,8 +26,9 @@ class OnboardingOneFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.onboardingOneTextViewSkip?.setOnClickListener{
+            SharedPreferencesRepository.setFirstLaunch()
             navigator().cancelFragment()
-            navigator().startFragment(LoginFragment())
+            navigator().replaceFragment(LoginFragment())
         }
     }
 

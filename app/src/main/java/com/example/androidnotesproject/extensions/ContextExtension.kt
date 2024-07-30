@@ -5,9 +5,9 @@ import android.widget.Toast
 import com.example.androidnotesproject.R
 import java.lang.Exception
 
-fun Context.getErrorString(errorCode: Int): String {
+fun Context.getString(code: Int): String {
     return try {
-        getString(errorCode)
+        getString(code)
     } catch (e: Exception) {
         getString(R.string.error_default)
     }

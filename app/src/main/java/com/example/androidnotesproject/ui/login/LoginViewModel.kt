@@ -1,18 +1,26 @@
 package com.example.androidnotesproject.ui.login
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.example.androidnotesproject.R
-import com.example.androidnotesproject.db.User
-import com.example.androidnotesproject.extensions.getErrorString
-import com.example.androidnotesproject.extensions.showToastShort
+import com.example.androidnotesproject.data.User
+import com.example.androidnotesproject.db.entities.UserEntity
+import com.example.androidnotesproject.repositories.SharedPreferencesRepository
+import com.example.androidnotesproject.repositories.UserRepository
 import com.example.androidnotesproject.utils.ValidateResult
 
 class LoginViewModel : ViewModel() {
 
-    fun logIn(context: Context, user: User) {
-//        logIn(user)
-        context.showToastShort(context.getErrorString(R.string.login_successful_text))
+    fun logIn(email: String, password: String) : Int {
+        val user: UserEntity? = UserRepository().getUser(email, password)
+        return if (user != null) {
+            SharedPreferencesRepository.setEmail(user.email)
+            SharedPreferencesRepository.setPass(user.password)
+            User.id = user.id
+            R.string.login_successful_text
+        } else {
+            R.string.login_unsuccessful_text
+        }
+
     }
 
     fun logInValidate(text: String, fieldType: String = "NULL"): ValidateResult {

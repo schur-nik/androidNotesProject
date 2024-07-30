@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.androidnotesproject.data.NoteItem
+import com.example.androidnotesproject.models.NoteItem
 import com.example.androidnotesproject.databinding.ItemNoteBinding
 import com.example.androidnotesproject.databinding.ItemScheduledNoteBinding
 

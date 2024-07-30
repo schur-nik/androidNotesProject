@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.androidnotesproject.databinding.FragmentAddNoteBinding
-import com.example.androidnotesproject.extensions.getErrorString
 import com.example.androidnotesproject.extensions.toSimpleText
 import com.example.androidnotesproject.utils.ValidateResult
 import java.time.LocalDate
@@ -59,7 +58,7 @@ class AddNoteFragment : Fragment() {
                 viewModel.addNoteValidate(addNoteEditTextTitle.text.toString()).apply {
                     when (this) {
                         is ValidateResult.Invalid -> addNoteEditTextTitle.error =
-                            requireContext().getErrorString(errorCode)
+                            requireContext().getString(errorCode)
 
                         else -> addNoteEditTextTitle.error = null
                     }
@@ -68,7 +67,7 @@ class AddNoteFragment : Fragment() {
                 viewModel.addNoteValidate(addNoteEditTextMessage.text.toString()).apply {
                     when (this) {
                         is ValidateResult.Invalid -> addNoteEditTextMessage.error =
-                            requireContext().getErrorString(errorCode)
+                            requireContext().getString(errorCode)
 
                         else -> addNoteEditTextMessage.error = null
                     }
@@ -77,7 +76,7 @@ class AddNoteFragment : Fragment() {
                 viewModel.addNoteValidate(addNoteEditTextDate.text.toString()).apply {
                     when (this) {
                         is ValidateResult.Invalid -> addNoteEditTextDate.error =
-                            requireContext().getErrorString(errorCode)
+                            requireContext().getString(errorCode)
 
                         else -> addNoteEditTextDate.error = null
                     }

@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.androidnotesproject.db.User
+import com.example.androidnotesproject.R
 import com.example.androidnotesproject.databinding.FragmentLoginBinding
-import com.example.androidnotesproject.extensions.getErrorString
+import com.example.androidnotesproject.extensions.showToastShort
 import com.example.androidnotesproject.ui.notes.NotesFragment
 import com.example.androidnotesproject.ui.signup.SignUpFragment
 import com.example.androidnotesproject.navigation.navigator
@@ -32,37 +32,37 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.loginTextViewToSignUp?.setOnClickListener {
-            navigator().startFragment(SignUpFragment())
+            navigator().replaceFragment(SignUpFragment())
         }
 
         binding?.run {
             loginButtonMain.setOnClickListener {
-                viewModel.logInValidate(loginEditTextEmail.text.toString(), "EMAIL_ADDRESS").apply {
-                    when (this) {
-                        is ValidateResult.Invalid -> loginEditTextEmail.error =
-                            requireContext().getErrorString(errorCode)
-                        else -> loginEditTextEmail.error = null
-                    }
+                loginEditTextEmail.apply {
+                    viewModel.logInValidate(text.toString(), "EMAIL_ADDRESS")
+                        .also { validateResult ->
+                            setFieldError(this, validateResult)
+                        }
                 }
 
-                viewModel.logInValidate(loginEditTextPassword.text.toString()).apply {
-                    when (this) {
-                        is ValidateResult.Invalid -> loginEditTextPassword.error =
-                            requireContext().getErrorString(errorCode)
-                        else -> loginEditTextPassword.error = null
+                loginEditTextPassword.apply {
+                    viewModel.logInValidate(text.toString()).also { validateResult ->
+                        setFieldError(this, validateResult)
                     }
                 }
 
                 if (loginEditTextEmail.error.isNullOrBlank() && loginEditTextPassword.error.isNullOrBlank()) {
-                    viewModel.logIn(
-                        context = requireContext(),
-                        user = User(
-                            email = loginEditTextEmail.text.toString(),
-                            password = loginEditTextPassword.text.toString()
-                        )
+                    val successful = viewModel.logIn(
+                        loginEditTextEmail.text.toString(),
+                        loginEditTextPassword.text.toString()
                     )
+                    requireContext().showToastShort(
+                        requireContext().getString(successful)
+                    )
+                    if (successful == R.string.login_successful_text
+                    ) {
+                        navigator().replaceFragment(NotesFragment(), false)
+                    }
 
-                    navigator().startFragment(NotesFragment())
                 }
             }
         }

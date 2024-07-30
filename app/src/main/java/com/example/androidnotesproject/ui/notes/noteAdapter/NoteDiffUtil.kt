@@ -1,7 +1,7 @@
 package com.example.androidnotesproject.ui.notes.noteAdapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.androidnotesproject.data.NoteItem
+import com.example.androidnotesproject.models.NoteItem
 
 class NoteDiffUtil : DiffUtil.ItemCallback<NoteItem>() {
 
